@@ -25,7 +25,9 @@ describe("PasswordValidator", () => {
   for (const char of specialChars) {
     test(`password is valid if has ${char}`, () => {
       const password = "a" + char
-      expect(new PasswordValidator(password).validateSpecialChars()).toBeTruthy()
+      expect(
+        new PasswordValidator(password).validateSpecialChars()
+      ).toBeTruthy()
     })
   }
 
