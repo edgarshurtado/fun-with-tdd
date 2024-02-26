@@ -1,26 +1,32 @@
 import specialChars from "./special-chars"
 export default class PasswordValidator {
-  static validate(pass: string): boolean {
+  #pass: string
+
+  constructor(pass: string) {
+    this.#pass = pass
+  }
+
+  validate(): boolean {
     return (
-      this.validateLength(pass) &&
-      this.validateSpecialChars(pass) &&
-      this.validateLowercase(pass) &&
-      this.validateUppercase(pass)
+      this.validateLength() &&
+      this.validateSpecialChars() &&
+      this.validateLowercase() &&
+      this.validateUppercase()
     )
   }
 
-  static validateLength(pass: string): boolean {
-    return pass.length >= 8 && pass.length <= 12
+  validateLength(): boolean {
+    return this.#pass.length >= 8 && this.#pass.length <= 12
   }
 
-  static validateSpecialChars(pass: string): boolean {
-    return specialChars.some((char) => pass.includes(char))
+  validateSpecialChars(): boolean {
+    return specialChars.some((char) => this.#pass.includes(char))
   }
 
-  static validateLowercase(pass: string): boolean {
-    return /[a-z]/.test(pass)
+  validateLowercase(): boolean {
+    return /[a-z]/.test(this.#pass)
   }
-  static validateUppercase(pass: string): boolean {
-    return /[A-Z]/.test(pass)
+  validateUppercase(): boolean {
+    return /[A-Z]/.test(this.#pass)
   }
 }
