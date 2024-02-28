@@ -31,24 +31,31 @@ describe("PasswordValidator", () => {
     })
   }
 
-  test("password is valid if has a lowercase char", () => {
+  test("password is invalid if has only lowercase chars", () => {
     const password = "a"
-    expect(new PasswordValidator(password).validateLowercase()).toBeTruthy()
+    expect(
+      new PasswordValidator(
+        password
+      ).validatePasswordHasLowerAndUppercaseLetters()
+    ).toBeFalsy()
   })
 
-  test("password is invalid if does NOT have any lowercase char", () => {
+  test("password is invalid if has only uppercase chars", () => {
     const password = "A"
-    expect(new PasswordValidator(password).validateLowercase()).toBeFalsy()
+    expect(
+      new PasswordValidator(
+        password
+      ).validatePasswordHasLowerAndUppercaseLetters()
+    ).toBeFalsy()
   })
 
-  test("password is valid if has an uppercase char", () => {
-    const password = "A"
-    expect(new PasswordValidator(password).validateUppercase()).toBeTruthy()
-  })
-
-  test("password is invalid if does NOT have any uppercase char", () => {
-    const password = "a"
-    expect(new PasswordValidator(password).validateUppercase()).toBeFalsy()
+  test("password is valid if has both upper and lowercase chars", () => {
+    const password = "aA"
+    expect(
+      new PasswordValidator(
+        password
+      ).validatePasswordHasLowerAndUppercaseLetters()
+    ).toBeTruthy()
   })
 
   test("full requirement password is valid", () => {
